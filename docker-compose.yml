@@ -29,3 +29,14 @@ services:
       MYSQL_PASSWORD: mysql
     volumes:
       - ./docker`/mysql/conf.d:/etc/mysql/conf.d
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: about-you-swagger-ui
+    ports:
+      - "8009:8080"
+    volumes:
+      - ./swagger/openapi.json:/openapi.json
+    environment:
+      SWAGGER_JSON: /openapi.json
+#      API_URL: "http://localhost:8008"
