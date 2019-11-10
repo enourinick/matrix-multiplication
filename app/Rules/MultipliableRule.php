@@ -6,16 +6,16 @@ use Illuminate\Contracts\Validation\Rule;
 
 class MultipliableRule implements Rule
 {
-    private $matrix1;
+    private $matrix2;
 
     /**
      * Create a new rule instance.
      *
-     * @param $matrix1
+     * @param $matrix2
      */
-    public function __construct($matrix1)
+    public function __construct($matrix2)
     {
-        $this->matrix1 = $matrix1;
+        $this->matrix2 = $matrix2;
     }
 
     /**
@@ -27,7 +27,7 @@ class MultipliableRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return count($value) === count($this->matrix1);
+        return is_array($this->matrix2) && count($value) === count($this->matrix2);
     }
 
     /**

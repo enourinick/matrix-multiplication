@@ -19,19 +19,23 @@ class MatrixRule implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed $value
      * @return bool
      */
     public function passes($attribute, $value)
     {
         $columnCount = null;
 
+        if (!is_array($value)) {
+            return false;
+        }
+
         foreach ($value as $row) {
             if ($columnCount === null) {
                 $columnCount = count($row);
             } else {
-                if($columnCount !== count($row)) {
+                if ($columnCount !== count($row)) {
                     return false;
                 }
             }
