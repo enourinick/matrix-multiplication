@@ -11,6 +11,9 @@ for make the app up and running please run the following command in the project 
 docker-compose up -d
 ```
 
+> It might take a while after first run to install composer and run migrations, to make sure if everything is done
+> properly please run `docker-compose logs -f core` (it will be done with running seeder as a migration).
+
 > Note that you need to generate oauth key-pairs and password grant client to call protected apis, to do so please read 
 > [Swagger-ui](#swagger-ui) section.
 
