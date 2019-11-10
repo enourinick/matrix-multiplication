@@ -1,74 +1,127 @@
+# Matrix multiplication
+
+A Laravel application for Matrix multiplication. The app features a REST-API with authentication (oauth2/laravel passport).
+
+## How to run
+
+Since the application is fully dockerized the only thing that needs to be installed on host machine is docker.
+for make the app up and running please run the following command in the project root directory:
+
+```shell script
+docker-compose up -d
+```
+
+> Note that you need to generate oauth key-pairs and password grant client to call protected apis, to do so please read 
+> [Swagger-ui](#swagger-ui) section.
+
+## Technical details
+
+This app contains three containers:
+
+- Application `core` container (application + NginX)
+- `database` (mysql 8)
+- `swagger-ui` for api documentation
+
+#### Core
+
+Core container, contains entire application including, `composer` and `nginx`. Base url to access core container form 
+the host machine is `http://localhost:8008/`.
+
+For getting access to core container command line, int the project root (the place where the `docker-compose.yml` file
+is located) you amy run `docker-compose exec core bash`. it will open a session to access command line via bash 
+interpreter into the core container.
+
+#### Database
+
+We have an instance of mysql 8 as the database container. you may access this database via following credentials from 
+the host machine:
+
+- port: `8306`
+- root's password: `localhostrootpwd`
+- default schema: `aboutyoutest`
+- username: `mysql`
+- password: `mysql`
+
+#### Swagger-ui
+
+In order to access swagger ui please open [localhost:8009](http://localhost:8009) in a browser.
+
+Since end points are protected via laravel passport guard, it needs to authenticate via a user with swagger-ui, to do so you may follow the instruction below.
+
+###### install laravel passport. 
+
+To install laravel passport it needs to be run `php artisan passport:install`, 
+as you may know (and according to the documentation) it will generate oauth key-pair as well as 2 clients. The first client (id: 1) is personal access client, 
+but since we are going to authenticate a sample seeded user via password grant we need to copy and keep client secret of of the second client (id: 2),
+which is a password client.
+
+![Passport install](./wiki/images/passport-install.png)
+
+###### authenticate via swagger-ui.
+
+To authenticate via swagger-ui, first please press `Authorize` button in top right and fill in the form with following values:
+
+![Authorize step 1](./wiki/images/authorize-step-1.png)
+
+- username: `admin@aboutyou.de`
+- password: `password`
+- client_id: `2`
+- client_secret: the token you've copied on step 1
+
+and press `Authorize` button
+
+![Authorize step 1](./wiki/images/authorize-step-1.png)
+
+Now you may open any api, press on `Try it out` and send your custom body to get proper response.
+
+## Tests
+
+Due to run tests, in core container please run the following command:
+
+```shell script
+vendor/bin/phpunit
+```
+
+Tests are divided to following groups:
+
+ - `authentication` (everything regarding authentication)
+ - `basic-rules` (test usage of laravel embedded rules)
+ - `calculate` (Test calculations)
+ - `default`
+ - `failure` (All tests with assertion of an exception or a kind of failure)
+ - `feature` (All feature tests)
+ - `in-memory-database` (Tests that require an in-memory database)
+ - `matrix-rule` (Tests related to implemented matrix rule)
+ - `multiplicable-rule` (Tests related to implemented multiplicable rule)
+ - `multiply-service` (Test multiply service)
+ - `repository` (All tests related to repositories)
+ - `rules` (All tests over implemented rules)
+ - `services` (Tests related to services)
+ - `success` (Tests that assert normal and success scenarios)
+ - `to-excel-column-name-converter-service` (Test to-excel-column-name-converter service)
+ - `unit` (All unit tests)
+ - `user` (Tests related to user entity)
+ - `user-service` (user service tests)
+ - `validation` (All tests related to validations, rules and requests)
+
+in order to run a group of test you can run tests via following command:
+
+```shell script
+vendor/bin/phpunit --group {group-name}
+```
+
+## Code Sniffer
+
+For run code sniffer, in the `core` container run the following command:
+
+```shell script
+vendor/bin/phpcs
+```
+
+## Author
+
+- Mohammad Nourinik - [github](https://github.org/enourinick/), [linkedin](https://www.linkedin.com/in/mohammad-nourinik-b7435236/)
+
+Powered by [laravel](https://laravel.com)
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
