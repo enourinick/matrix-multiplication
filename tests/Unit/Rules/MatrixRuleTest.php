@@ -3,8 +3,6 @@
 namespace Tests\Unit\Rules;
 
 use App\Rules\MatrixRule;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class MatrixRuleTest extends TestCase
@@ -22,26 +20,28 @@ class MatrixRuleTest extends TestCase
     /**
      * Test if the rule returns true.
      *
+     * @param array $data
      * @return void
      * @group rules
      * @group success
      * @group matrix-rule
+     * @group unit
      * @dataProvider successDataProvider
      */
-    public function testTrueOnEmptyMatrix($data)
+    public function testSuccess(array $data): void
     {
         $this->assertTrue($this->matrixRuleInstance->passes('matrix1', $data));
     }
 
     /**
-     * A basic unit test example.
+     * test false response on non empty 2 dimensional array.
      *
      * @return void
      * @group rules
      * @group failure
      * @group matrix-rule
      */
-    public function testFalseOnNonEmptyMatrix()
+    public function testFalseOnNonEmpty2DimensionalArray(): void
     {
         $this->assertFalse($this->matrixRuleInstance->passes(
             'matrix1',
@@ -54,7 +54,13 @@ class MatrixRuleTest extends TestCase
         ));
     }
 
-    public function successDataProvider() {
+    /**
+     * Data provider for success scenario.
+     *
+     * @return array
+     */
+    public function successDataProvider(): array
+    {
         return [
             [ // Test one, empty matrix
                 [[]]

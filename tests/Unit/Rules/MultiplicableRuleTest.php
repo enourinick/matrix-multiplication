@@ -12,13 +12,16 @@ class MultiplicableRuleTest extends TestCase
     /**
      * Test success.
      *
+     * @param array $firstRow
+     * @param array $matrix
      * @return void
      * @group rules
      * @group success
      * @group multiplicable-rule
+     * @group unit
      * @dataProvider successDataProvider
      */
-    public function testSuccess(array $firstRow, array $matrix)
+    public function testSuccess(array $firstRow, array $matrix): void
     {
         $multiplicableRuleInstance = new MultipliableRule($matrix);
 
@@ -28,13 +31,15 @@ class MultiplicableRuleTest extends TestCase
     /**
      * Test failure.
      *
+     * @param array $firstRow
+     * @param array $matrix
      * @return void
      * @group rules
      * @group failure
      * @group multiplicable-rule
      * @dataProvider failureDataProvider
      */
-    public function testFailure(array $firstRow, array $matrix)
+    public function testFailure(array $firstRow, array $matrix): void
     {
         $multiplicableRuleInstance = new MultipliableRule($matrix);
 
