@@ -40,7 +40,7 @@ abstract class BaseRequest extends FormRequest
      *
      * @return array
      */
-    protected abstract function postRules();
+    abstract protected function postRules();
 
     /**
      * Get the validation rules that apply to the put/patch request.
