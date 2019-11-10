@@ -24,3 +24,18 @@ Route::group([
 Route::middleware(['auth:api', 'cors'])->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::as('api.')->group(function () {
+    Route::middleware('auth:api')->group(function () {
+        Route::post('multiply', 'MultiplyController@multiply')->name('multiply');
+
+        Route::as('me.')->prefix('me')->group(function () {
+            Route::get('', 'UserController@show')->name('show');
+            Route::put('', 'UserController@update')->name('update');
+        });
+    });
+
+    Route::apiResource('user', 'UserController', ['only' => ['index', 'store']]);
+
+    Route::post('token', 'ApiTokenController@issueToken');
+});
