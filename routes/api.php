@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::group([
+    'middleware' => ['cors']
+], function() {
+    // add OPTIONS route to fire cors middleware for preflight
+    Route::options('{any}');
+});
+
+Route::middleware(['auth:api', 'cors'])->get('/user', function (Request $request) {
     return $request->user();
 });

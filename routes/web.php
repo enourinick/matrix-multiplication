@@ -11,6 +11,13 @@
 |
 */
 
+Route::group([
+    'middleware' => ['cors']
+], function() {
+    // add OPTIONS route to fire cors middleware for preflight
+    Route::options('{any}');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
