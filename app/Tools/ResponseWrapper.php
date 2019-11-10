@@ -8,8 +8,12 @@ class ResponseWrapper
 {
     const RESPONSE_DESCRIPTION = 'response_description';
 
-    public static function successMessage($responseMessage, $responseCode = Response::HTTP_OK, $headers = [], $options = 0)
-    {
+    public static function successMessage(
+        $responseMessage,
+        $responseCode = Response::HTTP_OK,
+        $headers = [],
+        $options = 0
+    ) {
         return response()->json(
             [
                 ResponseWrapper::RESPONSE_DESCRIPTION => $responseMessage
@@ -20,8 +24,12 @@ class ResponseWrapper
         );
     }
 
-    public static function successObject($responseObject, $responseCode = Response::HTTP_OK, $headers = [], $options = 0)
-    {
+    public static function successObject(
+        $responseObject,
+        $responseCode = Response::HTTP_OK,
+        $headers = [],
+        $options = 0
+    ) {
         return response()->json($responseObject, $responseCode, $headers, $options);
     }
 }

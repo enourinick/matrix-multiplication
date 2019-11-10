@@ -32,7 +32,7 @@ class UpdateTest extends BaseTestCase
      */
     public function testUpdate($executable, $expected, $fillable): void
     {
-        if(is_null($fillable)) {
+        if (is_null($fillable)) {
             $this->stubRepository->update($executable, $this->model);
         } else {
             $this->stubRepository->update($executable, $this->model, $fillable);

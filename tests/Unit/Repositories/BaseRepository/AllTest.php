@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\Repositories\BaseRepository;
 
-
 class AllTest extends BaseTestCase
 {
     /** @var array */
@@ -34,10 +33,26 @@ class AllTest extends BaseTestCase
     {
         parent::setUp();
 
-        $this->models[] = $this->createModel('Computer Networks', 'Andrew S. Tanenbaum', 'Appropriate for courses titled Computer Networking or ...')->toArray();
-        $this->models[] = $this->createModel('Head first design patterns', 'Kathy Sierra, Elisabeth Freeman', 'What’s so special about design patterns?At any given ...')->toArray();
-        $this->models[] = $this->createModel('Harry Potter', 'J. K. Rowling', 'Harry Potter is a series of fantasy novels written by ...')->toArray();
-        $this->models[] = $this->createModel('Introduction to Algorithms', 'CLRS', 'Introduction to Algorithms is a book by Thomas H. Cormen ...')->toArray();
+        $this->models[] = $this->createModel(
+            'Computer Networks',
+            'Andrew S. Tanenbaum',
+            'Appropriate for courses titled Computer Networking or ...'
+        )->toArray();
+        $this->models[] = $this->createModel(
+            'Head first design patterns',
+            'Kathy Sierra, Elisabeth Freeman',
+            'What’s so special about design patterns?At any given ...'
+        )->toArray();
+        $this->models[] = $this->createModel(
+            'Harry Potter',
+            'J. K. Rowling',
+            'Harry Potter is a series of fantasy novels written by ...'
+        )->toArray();
+        $this->models[] = $this->createModel(
+            'Introduction to Algorithms',
+            'CLRS',
+            'Introduction to Algorithms is a book by Thomas H. Cormen ...'
+        )->toArray();
     }
 
     public function tearDown(): void

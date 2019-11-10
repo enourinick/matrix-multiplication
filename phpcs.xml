@@ -4,9 +4,9 @@
 
 
     <file>./app</file>
+    <file>./tests</file>
 
     <exclude-pattern>*/docker/*</exclude-pattern>
-    <exclude-pattern>*/tests/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
     <exclude-pattern>*.(css|js|sh|phar|json|lock)</exclude-pattern>
 
@@ -14,8 +14,7 @@
     <arg name="report" value="full" />
     <arg value="ps" />
 
-    <rule ref="PSR2">
-        <exclude name="Generic.Files.LineLength.TooLong" />
-        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+    <rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
+        <exclude-pattern>*/Unit/Repositories/BaseRepository/BaseTestCase.php</exclude-pattern>
     </rule>
 </ruleset>

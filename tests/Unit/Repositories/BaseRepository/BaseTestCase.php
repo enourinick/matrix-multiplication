@@ -19,12 +19,14 @@ abstract class BaseTestCase extends TestCase
         parent::setUp();
 
         Config::set(
-            'database.connections.in-memory-test-db', [
+            'database.connections.in-memory-test-db',
+            [
             'driver' => 'sqlite',
             'database' => ':memory:',
             'charset' => 'utf8',
             'prefix' => '',
-        ]);
+            ]
+        );
 
         Schema::connection('in-memory-test-db')->create('books', function (Blueprint $table) {
             $table->increments('id');

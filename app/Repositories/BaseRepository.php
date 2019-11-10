@@ -203,7 +203,9 @@ abstract class BaseRepository implements RepositoryContract
         $model = $this->container->make($this->model());
 
         if (!$model instanceof Model) {
-            throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+            throw new RepositoryException(
+                "Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model"
+            );
         }
 
         return $model;

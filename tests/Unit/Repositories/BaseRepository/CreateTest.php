@@ -22,7 +22,7 @@ class CreateTest extends BaseTestCase
      */
     public function testCreate(array $executable, array $expected, array $fillable = null): void
     {
-        if(is_null($fillable)) {
+        if (is_null($fillable)) {
             $this->stubRepository->create($executable);
         } else {
             $this->stubRepository->create($executable, $fillable);
