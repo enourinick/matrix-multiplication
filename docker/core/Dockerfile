@@ -13,10 +13,11 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y \
     libxml2-dev \
     libzip-dev \
+    unzip \
     inetutils-syslogd
 
 # Install needed PHP extensions
-RUN docker-php-ext-install bcmath pdo_mysql
+RUN docker-php-ext-install bcmath pdo_mysql zip
 
 # Setup syslog
 COPY docker/core/syslog.conf /etc/syslog.conf
