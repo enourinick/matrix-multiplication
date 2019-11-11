@@ -5,10 +5,10 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 class CORS
 {
-
     /**
      * Handle an incoming request.
      *
@@ -26,13 +26,14 @@ class CORS
         ];
         if ($request->getMethod() == "OPTIONS") {
             // The client-side application can set only headers allowed in Access-Control-Allow-Headers
-            return Response::make('OK', 200, $headers);
+            return Response::make('OK', HttpFoundationResponse::HTTP_OK, $headers);
         }
 
         $response = $next($request);
         foreach ($headers as $key => $value) {
             $response->header($key, $value);
         }
+
         return $response;
     }
 }
