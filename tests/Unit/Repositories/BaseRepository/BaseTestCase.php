@@ -21,10 +21,10 @@ abstract class BaseTestCase extends TestCase
         Config::set(
             'database.connections.in-memory-test-db',
             [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'charset' => 'utf8',
-            'prefix' => '',
+                'driver' => 'sqlite',
+                'database' => ':memory:',
+                'charset' => 'utf8',
+                'prefix' => '',
             ]
         );
 
