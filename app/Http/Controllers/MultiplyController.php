@@ -6,6 +6,7 @@ use App\Http\Requests\MultiplyRequest;
 use App\Services\MultiplyService;
 use App\Services\ToExcelColumnNameConverterService;
 use Illuminate\Http\JsonResponse;
+use App\Tools\ResponseWrapper;
 
 class MultiplyController extends Controller
 {
@@ -37,6 +38,7 @@ class MultiplyController extends Controller
         $matrix2 = $request->get('matrix2');
 
         $result = $this->multiplyService->multiply($matrix1, $matrix2);
-        return response()->json($this->toExcelColumnNameConverterService->convertMatrix($result));
+
+        return ResponseWrapper::successObject($this->toExcelColumnNameConverterService->convertMatrix($result));
     }
 }
