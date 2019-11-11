@@ -33,8 +33,6 @@ class UserServiceTest extends TestCase
         /** @var UserService $userService */
         $userService = resolve(UserService::class);
         $userService->index();
-
-        $this->assertTrue(true);
     }
 
     /**
@@ -60,8 +58,6 @@ class UserServiceTest extends TestCase
         /** @var UserService $userService */
         $userService = resolve(UserService::class);
         $userService->store($data);
-
-        $this->assertTrue(true);
     }
 
     /**
@@ -86,8 +82,6 @@ class UserServiceTest extends TestCase
         /** @var UserService $userService */
         $userService = resolve(UserService::class);
         $userService->update($data, $user);
-
-        $this->assertTrue(true);
     }
 
     /**
@@ -111,7 +105,5 @@ class UserServiceTest extends TestCase
         /** @var UserService $userService */
         $userService = resolve(UserService::class);
         $userService->show($user);
-
-        $this->assertTrue(true);
     }
 }
