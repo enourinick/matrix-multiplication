@@ -28,7 +28,7 @@ services:
       MYSQL_USER: mysql
       MYSQL_PASSWORD: mysql
     volumes:
-      - ./docker`/mysql/conf.d:/etc/mysql/conf.d
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
 
   swagger-ui:
     image: swaggerapi/swagger-ui
