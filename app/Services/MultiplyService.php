@@ -4,7 +4,7 @@ namespace App\Services;
 
 class MultiplyService
 {
-    public function multiply(array $matrix1, array $matrix2)
+    public function multiply(array $matrix1, array $matrix2): array
     {
         $result = [];
 
