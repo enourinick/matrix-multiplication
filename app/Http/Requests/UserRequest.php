@@ -12,7 +12,7 @@ class UserRequest extends BaseRequest
      *
      * @return array
      */
-    protected function postRules()
+    protected function postRules(): array
     {
         return [
             'email' => 'required|unique:users,email|email',
@@ -21,7 +21,7 @@ class UserRequest extends BaseRequest
         ];
     }
 
-    protected function putRules()
+    protected function putRules(): array
     {
         return [
             'email' => [

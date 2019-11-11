@@ -12,7 +12,7 @@ class MultiplyRequest extends BaseRequest
      *
      * @return array
      */
-    protected function postRules()
+    protected function postRules(): array
     {
         return [
             'matrix1' => ['required', 'array', 'min:1', new MatrixRule()],
